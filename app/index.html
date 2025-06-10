@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Logs: api.p-kin.com</title>
+  </head>
+  <body>
+    <h1>Hello world!</h1>
+
+    <script>
+      const ws = new WebSocket("ws://localhost:5400/ws/logs/my_container_name");
+      ws.onmessage = (event) => {
+        // Append event.data to your log display area
+        console.log(event.data);
+      };
+    </script>
+  </body>
+</html>

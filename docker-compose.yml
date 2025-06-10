@@ -1,0 +1,11 @@
+# Docker compose file to run the API on the server
+# using the latest deployed image from Docker Hub
+
+services:
+  servlogs:
+    image: kinp/servlogs:latest
+    ports:
+      - "9999:9999"
+    env_file:
+      - .env
+    restart: always
