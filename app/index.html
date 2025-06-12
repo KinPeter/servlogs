@@ -8,12 +8,32 @@
   <body>
     <h1>Hello world!</h1>
 
+    <button id="close-btn">Close connection</button>
     <script>
-      const ws = new WebSocket("ws://localhost:5400/ws/logs/my_container_name");
+      const ws = new WebSocket(
+        "ws://localhost:9999/ws/logs/26055508c546e7b5ca06e3f4694ff823f7f6313a9ad8ecaa53ae8c235245d895?tail=100&api_key="
+      );
       ws.onmessage = (event) => {
         // Append event.data to your log display area
         console.log(event.data);
       };
+      ws.onerror = (error) => {
+        console.error("WebSocket error:", error);
+      };
+      ws.onclose = (event) => {
+        console.log("WebSocket connection closed:", event);
+      };
+
+      window.addEventListener("beforeunload", () => {
+        ws.close(1000, "Tab closed or page reloaded");
+      });
+
+      function close() {
+        console.log("Try Closing WebSocket connection...");
+        ws.close(1000, "User closed the connection");
+      }
+
+      document.getElementById("close-btn").addEventListener("click", close);
     </script>
   </body>
 </html>
