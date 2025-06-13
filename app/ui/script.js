@@ -90,12 +90,12 @@ function getContainerLog() {
     console.log("WebSocket connection established.");
     document.getElementById("connect-btn").style.display = "none";
     document.getElementById("close-btn").style.display = "inline";
+    document.getElementById("clear-btn").style.display = "inline";
     document.getElementById("container").disabled = true;
     document.getElementById("tail").disabled = true;
     clearLogs();
   };
   ws.onmessage = (event) => {
-    console.log(event.data);
     appendLog(event.data);
   };
   ws.onerror = (error) => {
@@ -105,6 +105,7 @@ function getContainerLog() {
     console.log("WebSocket connection closed:", event);
     document.getElementById("connect-btn").style.display = "inline";
     document.getElementById("close-btn").style.display = "none";
+    document.getElementById("clear-btn").style.display = "none";
     document.getElementById("container").disabled = false;
     document.getElementById("tail").disabled = false;
   };
@@ -129,7 +130,10 @@ function formatLine(logLine) {
 
     const timestampSpan = document.createElement("span");
     timestampSpan.classList.add("timestamp");
-    timestampSpan.textContent = new Date(timestamp).toLocaleString();
+    timestampSpan.textContent = new Date(timestamp)
+      .toLocaleString("hu-HU", {})
+      .replace(". ", ".")
+      .replace(". ", ".");
 
     const messageSpan = document.createElement("span");
     messageSpan.classList.add("message");

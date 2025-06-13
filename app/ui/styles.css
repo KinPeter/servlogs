@@ -10,6 +10,7 @@ body {
 
   --text-color: #333;
   --alt-text-color: #f4f4f4;
+  --light-text-color: #505050;
   --background-color: #f4f4f4;
   --primary-color: #007bff;
   --success-color: #28a745;
@@ -28,6 +29,7 @@ body {
 
     --text-color: #e0e0e0;
     --alt-text-color: #e0e0e0;
+    --light-text-color: #b0b0b0;
     --background-color: #121212;
     --primary-color: #004691;
     --success-color: #03dac5;
@@ -90,20 +92,20 @@ button:hover {
 .log-entry {
   font-family: monospace;
   font-size: 16px;
+  line-height: 1.2;
   margin-bottom: 2px;
 }
 
 .timestamp {
-  color: var(--text-color);
+  color: var(--light-text-color);
   font-size: 0.9em;
-  margin-right: 8px;
+  margin-right: 12px;
 }
 
 .level {
   display: inline-block;
-  padding: 2px 4px;
   font-weight: bold;
-  margin-right: 8px;
+  margin-right: 12px;
 }
 .level.info {
   color: var(--info-color);
