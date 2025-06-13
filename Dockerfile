@@ -14,4 +14,4 @@ COPY . .
 EXPOSE 9999
 
 # Run the FastAPI app
-CMD ["fastapi", "run", "api/main.py", "--port", "9999"]
+CMD ["fastapi", "run", "app/main.py", "--port", "9999"]
