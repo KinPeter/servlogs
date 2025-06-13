@@ -21,7 +21,7 @@ function getContainers() {
     return;
   }
 
-  fetch("./containers", {
+  fetch(`./containers/`, {
     headers: {
       "Content-Type": "application/json",
       "X-API-Key": apiKey,
@@ -81,10 +81,14 @@ function getContainerLog() {
     alert("Please select a container.");
     return;
   }
+  const apiBase =
+    window.location.hostname === "localhost" ||
+    window.location.hostname === "127.0.0.1"
+      ? "localhost:9999/logs"
+      : "api.p-kin.com/logs";
   const wsProtocol = window.location.protocol === "https:" ? "wss:" : "ws:";
-  const wsHost = window.location.host;
   const wsPath = `/ws/logs/${containerId}?tail=${tail}&api_key=${apiKey}`;
-  ws = new WebSocket(`${wsProtocol}//${wsHost}${wsPath}`);
+  ws = new WebSocket(`${wsProtocol}//${apiBase}${wsPath}`);
 
   ws.onopen = () => {
     console.log("WebSocket connection established.");

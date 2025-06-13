@@ -4,6 +4,7 @@ from contextlib import asynccontextmanager
 from dotenv import load_dotenv
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
+from fastapi.middleware.cors import CORSMiddleware
 
 from app.modules.containers import containers_router
 from app.modules.ui import ui_router
@@ -32,6 +33,20 @@ app = FastAPI(
     lifespan=lifespan,
     version=get_version(),
     description="Read and follow Docker server logs",
+)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "https://p-kin.com",
+        "https://www.p-kin.com",
+        "https://api.p-kin.com",
+        "https://stuff.p-kin.com",
+        "https://apilogs.p-kin.com",
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 app.add_middleware(LoggingMiddleware)
