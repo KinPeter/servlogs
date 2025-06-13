@@ -3,6 +3,7 @@ import docker
 from contextlib import asynccontextmanager
 from dotenv import load_dotenv
 from fastapi import FastAPI
+from fastapi.staticfiles import StaticFiles
 
 from app.modules.containers import containers_router
 from app.modules.ui import ui_router
@@ -38,3 +39,5 @@ app.add_middleware(LoggingMiddleware)
 app.include_router(ui_router.router)
 app.include_router(containers_router.router)
 app.include_router(websocket_router.router)
+
+app.mount("/static", StaticFiles(directory="app/ui", html=True), name="static")

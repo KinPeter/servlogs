@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Logs: api.p-kin.com</title>
+
+    <link rel="stylesheet" href="./static/styles.css" />
+  </head>
+  <body>
+    <div id="wrapper">
+      <div id="header">
+        <div class="left">
+          <div id="auth-container">
+            <label for="api-key">
+              API Key:
+              <input
+                type="text"
+                id="api-key"
+                placeholder="Enter your API key"
+                value=""
+                oninput="localStorage.setItem('apiKey', this.value)"
+              />
+            </label>
+            <button id="get-containers" onclick="getContainers()">Go</button>
+          </div>
+
+          <div id="selector-container" style="display: none">
+            <label for="container">
+              Container:
+              <select name="container" id="container" value="">
+                <option value="">Select a container</option>
+              </select>
+            </label>
+            <label for="tail">
+              Tail:
+              <input
+                type="number"
+                id="tail"
+                value="100"
+                step="100"
+                min="0"
+                max="10000"
+              />
+            </label>
+
+            <button id="connect-btn" onclick="getContainerLog()">
+              Connect
+            </button>
+            <button id="close-btn" style="display: none">
+              Close connection
+            </button>
+          </div>
+        </div>
+
+        <div class="right">
+          <button id="theme-btn" onclick="toggleTheme()">Theme</button>
+        </div>
+      </div>
+
+      <div id="logs"></div>
+    </div>
+    <script src="./static/script.js"></script>
+  </body>
+</html>
